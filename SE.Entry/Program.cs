@@ -17,17 +17,19 @@ public class Program
         var provider = services.BuildServiceProvider();
 
         var dispacher = provider.GetService<IDispacher>();
-        var manager = provider.GetService<IManager>();
-
-        if(dispacher != null && manager != null)
+        if(dispacher != null)
         {
-            var c1 = new ArchiveConsumer();
-            var c2 = new LoggerConsumer();
+            var manager = provider.GetService<IManager>();
+            if(manager != null)
+            {
+                var c1 = new ArchiveConsumer();
+                var c2 = new LoggerConsumer();
 
-            manager.AddConsumer(c1);
-            manager.AddConsumer(c2);
+                manager.AddConsumer(c1);
+                manager.AddConsumer(c2);
 
-            dispacher.Run();
+                dispacher.Run();
+            }
         }
     }
 }
