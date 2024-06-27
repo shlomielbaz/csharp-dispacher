@@ -28,6 +28,7 @@ namespace SE.Domain.Concrete
 				{
 					action(result);
 				}
+                Console.WriteLine("");
 			}
 		}
 
