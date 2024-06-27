@@ -21,7 +21,7 @@ namespace SE.Domain.Concrete
 
         public void Notify(SatelliteDataDTO data)
 		{
-			var result = _service.Calculate(data);
+			var result = _service?.Calculate(data);
 			if (result != null)
 			{
 				foreach(Action<SatelliteResultDTO> action in actions)
