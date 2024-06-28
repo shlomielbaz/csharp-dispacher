@@ -1,7 +1,6 @@
-﻿namespace SE.Domain.Interfaces
+﻿namespace SE.Domain.Interfaces;
+
+public interface IManager
 {
-    public interface IManager
-	{
-        public void AddConsumer(IConsumer consumer);
-    }
+    public void AddConsumer(IConsumer consumer);
 }
