@@ -7,8 +7,10 @@ namespace SE.Domain.Concrete
     public class Dispacher: IDispacher
     {
 		IList<Action<SatelliteResultDTO>> actions = new List<Action<SatelliteResultDTO>>();
-        private static long counter = 0;       
         private ISatelliteService _service;
+
+        private static long counter = 0;
+        private static Random random = new Random();
 
         public Dispacher(ISatelliteService service)
         {
@@ -25,15 +27,16 @@ namespace SE.Domain.Concrete
 			var result = _service?.Calculate(data);
 			if (result != null)
 			{
-				foreach(Action<SatelliteResultDTO> action in actions)
+                counter = counter + 1;
+                Console.WriteLine($"Notify Subscribers, Message No.: {counter}");
+
+                foreach (Action<SatelliteResultDTO> action in actions)
                 {
 					action(result);
 				}
 
-                counter = counter + 1;
-
-                Console.WriteLine($"Message No.: {counter}");
-			}
+                Console.WriteLine("");
+            }
 		}
 
         private async Task SetInterval(TimeSpan timeout)
@@ -42,14 +45,11 @@ namespace SE.Domain.Concrete
 
             var data = new SatelliteDataDTO();
 
-            Random random = new Random();
-
             data.X = random.NextDouble() * 100;
             data.Y = random.NextDouble() * 100;
             data.Z = random.NextDouble() * 100;
 
             this.Notify(data);
-
             _ = SetInterval(timeout);
         }
 
@@ -57,7 +57,6 @@ namespace SE.Domain.Concrete
         public void Run()
         {
             _ = SetInterval(TimeSpan.FromSeconds(2));
-
             Thread.Sleep(TimeSpan.FromMinutes(10));
         }
     }
