@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using SE.Domain.DTOs;
 using SE.Domain.Interfaces;
 
@@ -8,7 +9,7 @@ namespace SE.Domain.Concrete.consumers
     {
         public void Consume(SatelliteResultDTO result)
         {
-            Console.WriteLine($"LoggerConsumer result: {result.span}");
+            Console.WriteLine($"LoggerConsumer Consume Output: {result.span.ToString("F", CultureInfo.InvariantCulture)}");
         }
     }
 }

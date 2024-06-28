@@ -8,6 +8,7 @@ public class Program
 {
     public static void Main()
     {
+        #region DI handling
         ServiceCollection services = new ServiceCollection();
 
         services.AddSingleton<ISatelliteService, SatelliteService>()
@@ -15,7 +16,9 @@ public class Program
             .AddScoped<IManager, ConsumerManager>();
 
         var provider = services.BuildServiceProvider();
+        #endregion
 
+        #region Service Execution 
         var dispacher = provider.GetService<IDispacher>();
         if(dispacher != null)
         {
@@ -31,6 +34,7 @@ public class Program
                 dispacher.Run();
             }
         }
+        #endregion
     }
 }
 

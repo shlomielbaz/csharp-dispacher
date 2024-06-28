@@ -1,4 +1,5 @@
-﻿using SE.Domain.DTOs;
+﻿using System.Diagnostics.Metrics;
+using SE.Domain.DTOs;
 using SE.Domain.Interfaces;
 
 namespace SE.Domain.Concrete
@@ -6,7 +7,7 @@ namespace SE.Domain.Concrete
     public class Dispacher: IDispacher
     {
 		IList<Action<SatelliteResultDTO>> actions = new List<Action<SatelliteResultDTO>>();
-       
+        private static long counter = 0;       
         private ISatelliteService _service;
 
         public Dispacher(ISatelliteService service)
@@ -25,10 +26,13 @@ namespace SE.Domain.Concrete
 			if (result != null)
 			{
 				foreach(Action<SatelliteResultDTO> action in actions)
-				{
+                {
 					action(result);
 				}
-                Console.WriteLine("");
+
+                counter = counter + 1;
+
+                Console.WriteLine($"Message No.: {counter}");
 			}
 		}
 

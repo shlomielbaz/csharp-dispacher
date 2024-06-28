@@ -5,10 +5,6 @@ namespace SE.Domain.Services;
 
 public class SatelliteService: ISatelliteService
 {
-	public SatelliteService()
-	{
-	}
-
     public SatelliteResultDTO Calculate(SatelliteDataDTO data)
     {
         var result = new SatelliteResultDTO();
