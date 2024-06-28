@@ -6,7 +6,7 @@ namespace SE.Domain.Concrete
 {
     public class Dispacher: IDispacher
     {
-		IList<Action<SatelliteResultDTO>> actions = new List<Action<SatelliteResultDTO>>();
+		private IList<Action<SatelliteResultDTO>> actions = new List<Action<SatelliteResultDTO>>();
         private ISatelliteService _service;
 
         private static long counter = 0;
